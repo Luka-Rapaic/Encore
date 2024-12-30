@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <title>Encore!</title>
     <link type="text/css" rel="stylesheet" href="encore.css">
+    <link type="text/css" rel="stylesheet" href="game.css">
 </head>
-<body>
-    <div class="game-window">
+<body class="flex-container">
+    <div id="lobby-window" class="flex-container">
+        <div id="name_menu" class="flex-container menu">
+            <h2>Choose your name:</h2>
+            <input type="text" id="name_input">
+            <button onclick="register_name()">Continue</button>
+        </div>
+        <div id="main-menu" class="flex-container menu hidden">
+            <h2>Choose an option:</h2>
+            <div class="options">
+                <button onclick="create_game()">Create game</button>
+                <button>Join game</button>
+            </div>
+        </div>
+        <div id="room-menu" class="flex-container menu hidden">
+            <h2>Room id:</h2>
+            <h2 id="room_id"></h2>
+        </div>
+    </div>
+    <div class="game-window hidden">
         <div class="game">
 
             <div class="remaining-jokers">

@@ -95,6 +95,12 @@ ws.addEventListener("message", message => {
         case 13:
             handleDraw();
             break;
+        case 200:
+            update_name();
+            break;
+        case 205:
+            display_room(data);
+            break;
     }
 });
 
@@ -493,3 +499,41 @@ function winOrLoss(data) {
 function handleDraw() {
     alert("Congratulations! You are all winners!");
 }
+
+const NAME_MENU = document.getElementById("name_menu");
+const NAME_INPUT = document.getElementById("name_input");
+const MAIN_MENU = document.getElementById("main-menu");
+const ROOM_MENU = document.getElementById("room-menu");
+const ROOM_ID = document.getElementById("room_id")
+
+//TYPE 100
+function register_name() {
+    let name = NAME_INPUT.value;
+    let message = {type: 100, name: name}
+    ws.send(JSON.stringify(message));
+}
+
+//TYPE 101
+function create_game() {
+    let message = {type: 101};
+    ws.send(JSON.stringify(message));
+}
+
+
+//RECEIVED MESSAGES
+//TYPE 200
+function update_name() {
+    NAME_MENU.classList.add("hidden");
+    MAIN_MENU.classList.remove("hidden");
+}
+
+//TYPE 205
+function display_room(data) {
+    if (!data.hasOwnProperty("id")) return;
+    ROOM_ID.innerHTML = data.id;
+
+    MAIN_MENU.classList.add("hidden");
+    ROOM_MENU.classList.remove("hidden");
+}
+
+//TYPE

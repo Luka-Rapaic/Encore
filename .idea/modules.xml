@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Encore!.iml" filepath="$PROJECT_DIR$/.idea/Encore!.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../encore_server/.idea/encore_server.iml" filepath="$PROJECT_DIR$/../encore_server/.idea/encore_server.iml" />
     </modules>
   </component>
 </project>
