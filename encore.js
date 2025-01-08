@@ -57,7 +57,7 @@ ws.addEventListener("message", message => {
         case 0:
             startGame(data);
             break;
-        case 2:
+        case 209:
             receiveDice(data);
             break;
         case 3:
@@ -98,8 +98,17 @@ ws.addEventListener("message", message => {
         case 200:
             update_name();
             break;
+        case 203:
+            update_clients(data);
+            break;
+        case 204:
+            display_start_button();
+            break;
         case 205:
             display_room(data);
+            break;
+        case 206:
+            display_game_window();
             break;
     }
 });
@@ -142,18 +151,18 @@ function diceClick(dye) {
 
 function throwDice() {
     canThrowDice = false;
-    let message = {type: 2};
+    let message = {type: 105};
     ws.send(JSON.stringify(message));
 }
 
 function receiveDice(data) {
     for (let i = 0; i < 3; i++) {
         dice[i].classList.remove(diceValues[i]);
-        diceValues[i] = data.diceValues[i]
+        diceValues[i] = data.dice[i];
         dice[i].classList.add(diceValues[i]);
     }
     for (let i = 3; i < 6; i++) {
-        diceValues[i] = data.diceValues[i]
+        diceValues[i] = data.dice[i];
         dice[i].innerHTML = diceValues[i];
     }
 
@@ -503,8 +512,17 @@ function handleDraw() {
 const NAME_MENU = document.getElementById("name_menu");
 const NAME_INPUT = document.getElementById("name_input");
 const MAIN_MENU = document.getElementById("main-menu");
+const JOIN_INPUT = document.getElementById("join-input");
 const ROOM_MENU = document.getElementById("room-menu");
 const ROOM_ID = document.getElementById("room_id")
+const ROOM_CLIENTS = document.getElementById("room_clients");
+const ROOM_START = document.getElementById("room-start");
+const GAME_WINDOW = document.getElementById("game-window");
+
+function display_name_menu() {
+    MAIN_MENU.classList.add("hidden");
+    NAME_MENU.classList.remove("hidden");
+}
 
 //TYPE 100
 function register_name() {
@@ -519,12 +537,54 @@ function create_game() {
     ws.send(JSON.stringify(message));
 }
 
+//TYPE 102
+function join_game() {
+    let roomID = JOIN_INPUT.value;
+
+    let message = {type: 102, roomID: roomID};
+    ws.send(JSON.stringify(message));
+}
+
+//TYPE 103
+function leave_room() {
+    if (!ROOM_START.classList.contains("hidden")) ROOM_START.classList.add("hidden");
+    ROOM_MENU.classList.add("hidden");
+    MAIN_MENU.classList.remove("hidden");
+
+    let message = {type: 103};
+    ws.send(JSON.stringify(message));
+}
+
+//TYPE 104
+function start_game() {
+    let message = {type: 104}
+    ws.send(JSON.stringify(message));
+}
+
 
 //RECEIVED MESSAGES
 //TYPE 200
 function update_name() {
     NAME_MENU.classList.add("hidden");
     MAIN_MENU.classList.remove("hidden");
+}
+
+//TYPE 203
+function update_clients(data) {
+    if (!data.hasOwnProperty("clients")) return;
+    ROOM_CLIENTS.innerHTML = "";
+
+    let clients = data.clients;
+    for (let client of clients) {
+        let node = document.createElement("h2");
+        node.innerHTML = client;
+        ROOM_CLIENTS.appendChild(node);
+    }
+}
+
+//TYPE 204
+function display_start_button() {
+    ROOM_START.classList.remove("hidden");
 }
 
 //TYPE 205
@@ -536,4 +596,8 @@ function display_room(data) {
     ROOM_MENU.classList.remove("hidden");
 }
 
-//TYPE
+//TYPE 206
+function display_game_window() {
+    ROOM_MENU.classList.add("hidden");
+    GAME_WINDOW.classList.remove("hidden");
+}

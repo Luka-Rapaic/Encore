@@ -9,23 +9,41 @@
 <body class="flex-container">
     <div id="lobby-window" class="flex-container">
         <div id="name_menu" class="flex-container menu">
-            <h2>Choose your name:</h2>
-            <input type="text" id="name_input">
-            <button onclick="register_name()">Continue</button>
-        </div>
-        <div id="main-menu" class="flex-container menu hidden">
-            <h2>Choose an option:</h2>
+            <h1>Setup</h1>
+            <div class="padded flex-container">
+                <input type="text" id="name_input" placeholder="Enter your name...">
+            </div>
             <div class="options">
-                <button onclick="create_game()">Create game</button>
-                <button>Join game</button>
+                <button onclick="register_name()">Continue</button>
             </div>
         </div>
+
+        <div id="main-menu" class="flex-container menu hidden">
+            <h1>Lobby</h1>
+            <div class="options">
+                <button onclick="create_game()">Create game</button>
+            </div>
+            <div class="padded">
+                <input type="text" id="join-input" placeholder="Enter game id...">
+            </div>
+            <div class="options">
+                <button onclick="join_game()">Join game</button>
+                <button onclick="display_name_menu()">Back</button>
+            </div>
+        </div>
+
         <div id="room-menu" class="flex-container menu hidden">
-            <h2>Room id:</h2>
+            <h1>Room id:</h1>
             <h2 id="room_id"></h2>
+            <h1>Players</h1>
+            <div id="room_clients"></div>
+            <div class="options">
+                <button onclick="start_game()" id="room-start" class="hidden">Start game</button>
+                <button onclick="leave_room()">Leave room</button>
+            </div>
         </div>
     </div>
-    <div class="game-window hidden">
+    <div class="game-window hidden" id="game-window">
         <div class="game">
 
             <div class="remaining-jokers">
@@ -470,6 +488,8 @@
         </div>
 
     </div>
+
+    <button onclick="throwDice()">Throw dice</button>
 
     <script src="encore.js"></script>
 </body>

@@ -13,16 +13,33 @@ body {
     align-items: center;
 }
 
+.padded {
+    padding: 0 20px;
+}
+
 .menu {
     align-items: stretch;
     width: fit-content;
     border-radius: 20px;
-    padding: 20px;
     background-color: whitesmoke;
+    overflow: hidden;
+}
+
+.menu>:last-child {
+    margin-bottom: 10px;
+}
+
+.menu h1 {
+    padding: 10px;
+    margin: 0;
+    font-size: 1.5em;
+    background-color: black;
+    color: white;
+    text-align: center;
 }
 
 .menu h2 {
-    padding: 0;
+    padding: 10px 20px;
     margin: 0;
     font-size: 1.5em;
 }
@@ -39,10 +56,19 @@ body {
     cursor: pointer;
 }
 
+.menu input {
+    font-family: Arial;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 20px;
+}
+
 .options {
     display: flex;
     flex-flow: column nowrap;
     row-gap: 5px;
+    padding: 0 20px;
 }
 
 .options>button {
