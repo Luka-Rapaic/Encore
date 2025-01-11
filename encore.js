@@ -60,10 +60,16 @@ ws.addEventListener("message", message => {
         case 209:
             receiveDice(data);
             break;
+        case 210:
+            turnAccepted();
+            break;
+        case 211:
+            turnDenied();
+            break;
         case 3:
             receiveDice(data);
             break;
-        case 4:
+        case 5:
             receiveTurnResponse(data);
             break;
         case 5:
@@ -199,6 +205,16 @@ function selectDye(dye) {
     console.log(number);
     console.log(color);
     console.log('\n');
+}
+
+function turnAccepted() {
+    clearDyeSelection();
+    crossTileSelection();
+}
+
+function turnDenied() {
+    clearDyeSelection();
+    crossTileSelection();
 }
 
 function receiveTurnResponse(data) {
