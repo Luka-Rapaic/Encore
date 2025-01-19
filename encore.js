@@ -1,3 +1,6 @@
+import {VerifyData} from "./VerifyData.js";
+import {ReceiveMessage} from "./ReceiveMessage.js";
+
 let dice = setupDice();
 let diceValues = [];
 let selectedDice = {};
@@ -57,17 +60,26 @@ ws.addEventListener("message", message => {
         case 0:
             startGame(data);
             break;
+        case 208:
+            ReceiveMessage.canThrowDice();
+            break;
         case 209:
-            receiveDice(data);
+            ReceiveMessage.newDice(data);
             break;
         case 210:
-            turnAccepted();
+            receiveUsedDice(data);
             break;
         case 211:
-            turnDenied();
+            ReceiveMessage.validTurn();
+            break;
+        case 212:
+            ReceiveMessage.invalidTurn();
+            break;
+        case 213:
+            ReceiveMessage.myTurn();
             break;
         case 3:
-            receiveDice(data);
+            receiveNewDice(data);
             break;
         case 5:
             receiveTurnResponse(data);
@@ -119,11 +131,6 @@ ws.addEventListener("message", message => {
     }
 });
 
-function joinQueue() {
-    let message = {type: 0};
-    ws.send(JSON.stringify(message));
-}
-
 function startGame(data) {
     if (data.isOnTurn) {
         enableDice();
@@ -148,20 +155,7 @@ function startTurn(data) {
     enableDice();
 }
 
-function diceClick(dye) {
-    if (canThrowDice) throwDice();
-    else {
-        selectDye(dye);
-    }
-}
-
-function throwDice() {
-    canThrowDice = false;
-    let message = {type: 105};
-    ws.send(JSON.stringify(message));
-}
-
-function receiveDice(data) {
+function receiveNewDice(data) {
     for (let i = 0; i < 3; i++) {
         dice[i].classList.remove(diceValues[i]);
         diceValues[i] = data.dice[i];
@@ -175,46 +169,9 @@ function receiveDice(data) {
     disableTiles = false;
 }
 
-function selectDye(dye) {
-    if (dye.classList.contains("number-dye")) {
-        if (numberDye != null) {
-            numberDye.classList.remove("selected-dye");
-        }
-        numberDye = dye;
-        numberDye.classList.add("selected-dye");
-        for (let i = 3; i < 6; i++) {
-            if (dice[i] === numberDye) {
-                number = diceValues[i];
-                selectedDice.number = i;
-            }
-        }
-    } else {
-        if (colorDye != null) {
-            colorDye.classList.remove("selected-dye");
-        }
-        colorDye = dye;
-        colorDye.classList.add("selected-dye");
-        for (let i = 0; i < 3; i++) {
-            if (dice[i] === colorDye) {
-                color = diceValues[i];
-                selectedDice.color = i;
-            }
-        }
-    }
-
-    console.log(number);
-    console.log(color);
-    console.log('\n');
-}
-
-function turnAccepted() {
-    clearDyeSelection();
-    crossTileSelection();
-}
-
-function turnDenied() {
-    clearDyeSelection();
-    crossTileSelection();
+function receiveUsedDice(data) {
+    let indices = VerifyData.usedDice(data);
+    for (let index of indices) dice[index].classList.add("unavailable-dye");
 }
 
 function receiveTurnResponse(data) {
@@ -302,81 +259,6 @@ function setupPoints() {
     pointsDOM.starPenalty = document.getElementById("starPenalty");
     pointsDOM.pointTotal = document.getElementById("pointsTotal");
     return pointsDOM;
-}
-
-function selectTile(tile) {
-    if (disableTiles) return;
-
-    let coords = {"x": parseInt(tile.dataset.x), "y": parseInt(tile.dataset.y)};
-
-    if (selectedTiles.includes(coords) || selectedTiles.length >= number || !tile.classList.contains("tile-" + color) || tile.classList.contains("tile-crossed")) return;
-
-    if (selectedTiles.length === 0) {
-        if (coords.x === 7) {
-            selectedTiles.push(coords);
-            selectedTilesDOM.push(tile);
-            tile.classList.add("tile-selected");
-            tile.setAttribute("onclick", "deselectTile(this)");
-            return;
-        }
-
-        for (let crossedTile of crossedTiles) {
-            if (isAdjacent(coords, crossedTile)) {
-                selectedTiles.push(coords);
-                selectedTilesDOM.push(tile);
-                tile.classList.add("tile-selected");
-                tile.setAttribute("onclick", "deselectTile(this)");
-                return;
-            }
-        }
-
-        return;
-    }
-
-    for (let selectedTile of selectedTiles) {
-        if (isAdjacent(coords, selectedTile)) {
-            selectedTiles.push(coords);
-            selectedTilesDOM.push(tile);
-            tile.classList.add("tile-selected");
-            tile.setAttribute("onclick", "deselectTile(this)");
-            return;
-        }
-    }
-}
-
-function deselectTile(tile) {
-    if (disableTiles) return;
-
-    let index = selectedTilesDOM.indexOf(tile);
-    if (index === -1) return;
-
-    tile.classList.remove("tile-selected");
-    tile.setAttribute("onclick", "selectTile(this)");
-
-    selectedTilesDOM.splice(index, 1);
-    selectedTiles.splice(index, 1);
-}
-
-function lockTiles() {
-    if (selectedTiles.length !== number) return;
-    let message = {"type": "command", "command": "lockTiles", "selectedTiles": selectedTiles};
-    ws.send(JSON.stringify(message));
-}
-
-function endTurn() {
-    if (selectedTiles.length !== number && selectedTiles.length !== 0) return;
-
-    disableTiles = true;
-    disableDice();
-
-    let message = {type: 3, selectedDice: selectedDice, selectedTiles: selectedTiles};
-    ws.send(JSON.stringify(message));
-}
-
-function isAdjacent(tile1, tile2) {
-    if (tile1.x == tile2.x && (tile1.y == tile2.y - 1 || tile1.y == tile2.y + 1)) return true;
-    if (tile1.y == tile2.y && (tile1.x == tile2.x - 1 || tile1.x == tile2.x + 1)) return true;
-    return false;
 }
 
 function clearDyeSelection() {
@@ -532,29 +414,29 @@ const JOIN_INPUT = document.getElementById("join-input");
 const ROOM_MENU = document.getElementById("room-menu");
 const ROOM_ID = document.getElementById("room_id")
 const ROOM_CLIENTS = document.getElementById("room_clients");
-const ROOM_START = document.getElementById("room-start");
+const ROOM_START = document.getElementById("room-menu-button-start-game");
 const GAME_WINDOW = document.getElementById("game-window");
 
-function display_name_menu() {
+export function display_name_menu() {
     MAIN_MENU.classList.add("hidden");
     NAME_MENU.classList.remove("hidden");
 }
 
 //TYPE 100
-function register_name() {
+export function register_name() {
     let name = NAME_INPUT.value;
     let message = {type: 100, name: name}
     ws.send(JSON.stringify(message));
 }
 
 //TYPE 101
-function create_game() {
+export function create_game() {
     let message = {type: 101};
     ws.send(JSON.stringify(message));
 }
 
 //TYPE 102
-function join_game() {
+export function join_game() {
     let roomID = JOIN_INPUT.value;
 
     let message = {type: 102, roomID: roomID};
@@ -562,7 +444,7 @@ function join_game() {
 }
 
 //TYPE 103
-function leave_room() {
+export function leave_room() {
     if (!ROOM_START.classList.contains("hidden")) ROOM_START.classList.add("hidden");
     ROOM_MENU.classList.add("hidden");
     MAIN_MENU.classList.remove("hidden");
@@ -572,7 +454,7 @@ function leave_room() {
 }
 
 //TYPE 104
-function start_game() {
+export function start_game() {
     let message = {type: 104}
     ws.send(JSON.stringify(message));
 }
@@ -617,3 +499,5 @@ function display_game_window() {
     ROOM_MENU.classList.add("hidden");
     GAME_WINDOW.classList.remove("hidden");
 }
+
+export {ws};

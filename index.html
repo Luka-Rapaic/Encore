@@ -14,21 +14,21 @@
                 <input type="text" id="name_input" placeholder="Enter your name...">
             </div>
             <div class="options">
-                <button onclick="register_name()">Continue</button>
+                <button id="name-menu-button-continue">Continue</button>
             </div>
         </div>
 
         <div id="main-menu" class="flex-container menu hidden">
             <h1>Lobby</h1>
             <div class="options">
-                <button onclick="create_game()">Create game</button>
+                <button id="main-menu-button-create-game">Create game</button>
             </div>
             <div class="padded">
                 <input type="text" id="join-input" placeholder="Enter game id...">
             </div>
             <div class="options">
-                <button onclick="join_game()">Join game</button>
-                <button onclick="display_name_menu()">Back</button>
+                <button id="main-menu-button-join-game">Join game</button>
+                <button id="main-menu-button-back">Back</button>
             </div>
         </div>
 
@@ -38,8 +38,8 @@
             <h1>Players</h1>
             <div id="room_clients"></div>
             <div class="options">
-                <button onclick="start_game()" id="room-start" class="hidden">Start game</button>
-                <button onclick="leave_room()">Leave room</button>
+                <button id="room-menu-button-start-game" id="room-start" class="hidden">Start game</button>
+                <button id="room-menu-button-leave-game">Leave room</button>
             </div>
         </div>
     </div>
@@ -77,325 +77,325 @@
                 </div>
 
                 <div class="main-table">
-                    <div class="tile tile-green" data-x="0" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="0" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="1" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="1" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="2" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="2" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="3" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="3" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="4" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="4" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="5" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="5" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="6" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="6" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-green star" data-x="7" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-green star" data-x="7" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="8" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-blue" data-x="8" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="9" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-blue" data-x="9" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="10" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-blue" data-x="10" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange star" data-x="11" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-orange star" data-x="11" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="12" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="12" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="13" data-y="0" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="13" data-y="0">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="14" data-y="0" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-
-                    <div class="tile tile-orange" data-x="0" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-green" data-x="1" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-yellow star" data-x="2" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-green" data-x="3" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-yellow star" data-x="4" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-yellow" data-x="5" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange" data-x="6" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange" data-x="7" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red" data-x="8" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue star" data-x="9" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue" data-x="10" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange" data-x="11" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange" data-x="12" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-green" data-x="13" data-y="1" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-green" data-x="14" data-y="1" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="14" data-y="0">
                         <div></div>
                     </div>
 
-                    <div class="tile tile-blue star" data-x="0" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-orange" data-x="0" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="1" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="1" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="2" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-yellow star" data-x="2" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="3" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="3" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="4" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-yellow star" data-x="4" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="5" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="5" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-green star" data-x="6" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-orange" data-x="6" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="7" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-orange" data-x="7" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="8" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-red" data-x="8" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="9" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-blue star" data-x="9" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="10" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-blue" data-x="10" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="11" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-orange" data-x="11" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="12" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-orange" data-x="12" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="13" data-y="2" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="13" data-y="1">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="14" data-y="2" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-
-                    <div class="tile tile-blue" data-x="0" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red" data-x="1" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red" data-x="2" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-green" data-x="3" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange" data-x="4" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange star" data-x="5" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue" data-x="6" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue" data-x="7" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-green" data-x="8" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-green" data-x="9" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-yellow" data-x="10" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-yellow" data-x="11" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange" data-x="12" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red star" data-x="13" data-y="3" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue" data-x="14" data-y="3" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="14" data-y="1">
                         <div></div>
                     </div>
 
-                    <div class="tile tile-red" data-x="0" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-blue star" data-x="0" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="1" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="1" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="2" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-red" data-x="2" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="3" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="3" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="4" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="4" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="5" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="5" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="6" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-green star" data-x="6" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="7" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-red" data-x="7" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="8" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-red" data-x="8" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="9" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-red" data-x="9" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="10" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="10" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="11" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="11" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="12" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-orange" data-x="12" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="13" data-y="4" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="13" data-y="2">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="14" data-y="4" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-
-                    <div class="tile tile-red" data-x="0" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue star" data-x="1" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue" data-x="2" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red star" data-x="3" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red" data-x="4" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red" data-x="5" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red" data-x="6" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-yellow" data-x="7" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-yellow star" data-x="8" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange" data-x="9" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-red star" data-x="10" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue" data-x="11" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue" data-x="12" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-blue" data-x="13" data-y="5" onclick="selectTile(this)">
-                        <div></div>
-                    </div>
-                    <div class="tile tile-orange star" data-x="14" data-y="5" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="14" data-y="2">
                         <div></div>
                     </div>
 
-                    <div class="tile tile-yellow" data-x="0" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-blue" data-x="0" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="1" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-red" data-x="1" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="2" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-red" data-x="2" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="3" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="3" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="4" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-orange" data-x="4" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-blue" data-x="5" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-orange star" data-x="5" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-red" data-x="6" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-blue" data-x="6" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="7" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-blue" data-x="7" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="8" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="8" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-yellow" data-x="9" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-green" data-x="9" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="10" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="10" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-green" data-x="11" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-yellow" data-x="11" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-green star" data-x="12" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-orange" data-x="12" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="13" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-red star" data-x="13" data-y="3">
                         <div></div>
                     </div>
-                    <div class="tile tile-orange" data-x="14" data-y="6" onclick="selectTile(this)">
+                    <div class="tile tile-blue" data-x="14" data-y="3">
+                        <div></div>
+                    </div>
+
+                    <div class="tile tile-red" data-x="0" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="1" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="2" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="3" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="4" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="5" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="6" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="7" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="8" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="9" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="10" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="11" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="12" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="13" data-y="4">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="14" data-y="4">
+                        <div></div>
+                    </div>
+
+                    <div class="tile tile-red" data-x="0" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue star" data-x="1" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="2" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red star" data-x="3" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="4" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="5" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="6" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-yellow" data-x="7" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-yellow star" data-x="8" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="9" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red star" data-x="10" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="11" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="12" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="13" data-y="5">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange star" data-x="14" data-y="5">
+                        <div></div>
+                    </div>
+
+                    <div class="tile tile-yellow" data-x="0" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-yellow" data-x="1" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="2" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="3" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="4" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-blue" data-x="5" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-red" data-x="6" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-yellow" data-x="7" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-yellow" data-x="8" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-yellow" data-x="9" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-green" data-x="10" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-green" data-x="11" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-green star" data-x="12" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="13" data-y="6">
+                        <div></div>
+                    </div>
+                    <div class="tile tile-orange" data-x="14" data-y="6">
                         <div></div>
                     </div>
                 </div>
@@ -470,13 +470,13 @@
 
             <div class="dice">
 
-                <div class="color-dye" id="dye0" onclick="diceClick(this)"></div>
-                <div class="color-dye" id="dye1" onclick="diceClick(this)"></div>
-                <div class="color-dye" id="dye2" onclick="diceClick(this)"></div>
+                <div class="color-dye" id="dye0"></div>
+                <div class="color-dye" id="dye1"></div>
+                <div class="color-dye" id="dye2"></div>
 
-                <div class="number-dye" id="dye3" onclick="diceClick(this)"></div>
-                <div class="number-dye" id="dye4" onclick="diceClick(this)"></div>
-                <div class="number-dye" id="dye5" onclick="diceClick(this)"></div>
+                <div class="number-dye" id="dye3"></div>
+                <div class="number-dye" id="dye4"></div>
+                <div class="number-dye" id="dye5"></div>
 
             </div>
 
@@ -484,13 +484,18 @@
 
         <div>
             <button onclick="joinQueue()">Zapocni igru</button>
-            <button onclick="endTurn()">Zavrsi potez</button>
+            <button onclick="endTurn()" id="end-turn-button">Zavrsi potez</button>
         </div>
 
     </div>
 
     <button onclick="throwDice()">Throw dice</button>
 
-    <script src="encore.js"></script>
+    <script src="encore.js" type="module"></script>
+    <script src="commands.js" type="module"></script>
+    <script src="SendMessage.js" type="module"></script>
+    <script src="VerifyData.js" type="module"></script>
+    <script src="ReceiveMessage.js" type="module"></script>
+    <script src="SetupDOM.js" type="module"></script>
 </body>
 </html>
